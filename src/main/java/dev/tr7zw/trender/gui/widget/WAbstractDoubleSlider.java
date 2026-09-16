@@ -1,12 +1,12 @@
 package dev.tr7zw.trender.gui.widget;
 
 import dev.tr7zw.transition.mc.*;
+import dev.tr7zw.trender.gui.client.*;
 import dev.tr7zw.trender.gui.widget.data.*;
 import java.util.function.*;
 import lombok.*;
 import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
-import org.lwjgl.glfw.*;
 //? if >= 1.18.0 {
 import dev.tr7zw.trender.gui.impl.client.*;
 import net.minecraft.client.gui.narration.*;
@@ -340,7 +340,7 @@ public abstract class WAbstractDoubleSlider extends WWidget {
                 value++;
                 valueChanged = true;
             }
-        } else if (modifiers == GLFW.GLFW_MOD_CONTROL) {
+        } else if (modifiers == KeyCodes.MOD_CONTROL) {
             if (isDecreasingKey(ch, direction) && value != min) {
                 value = min;
                 valueChanged = true;
@@ -400,8 +400,8 @@ public abstract class WAbstractDoubleSlider extends WWidget {
      * @since 2.0.0
      */
     public static boolean isDecreasingKey(int ch, Direction direction) {
-        return direction.isInverted() ? (ch == GLFW.GLFW_KEY_RIGHT || ch == GLFW.GLFW_KEY_UP)
-                : (ch == GLFW.GLFW_KEY_LEFT || ch == GLFW.GLFW_KEY_DOWN);
+        return direction.isInverted() ? (ch == KeyCodes.RIGHT || ch == KeyCodes.UP)
+                : (ch == KeyCodes.LEFT || ch == KeyCodes.DOWN);
     }
 
     /**
@@ -414,8 +414,8 @@ public abstract class WAbstractDoubleSlider extends WWidget {
      * @since 2.0.0
      */
     public static boolean isIncreasingKey(int ch, Direction direction) {
-        return direction.isInverted() ? (ch == GLFW.GLFW_KEY_LEFT || ch == GLFW.GLFW_KEY_DOWN)
-                : (ch == GLFW.GLFW_KEY_RIGHT || ch == GLFW.GLFW_KEY_UP);
+        return direction.isInverted() ? (ch == KeyCodes.LEFT || ch == KeyCodes.DOWN)
+                : (ch == KeyCodes.RIGHT || ch == KeyCodes.UP);
     }
 
     /**

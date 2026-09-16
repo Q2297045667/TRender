@@ -11,7 +11,6 @@ import net.minecraft.client.gui.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.util.*;
 import org.jetbrains.annotations.*;
-import org.lwjgl.glfw.*;
 //? if >= 1.18.0 {
 import net.minecraft.client.gui.narration.*;
 //? }
@@ -394,7 +393,7 @@ public class WTextField extends WWidget {
 
     private void delete(int modifiers, boolean backwards) {
         if (select == -1 || select == cursor) {
-            select = skipCharacters((GLFW.GLFW_MOD_CONTROL & modifiers) != 0, backwards ? -1 : 1);
+            select = skipCharacters((KeyCodes.MOD_CONTROL & modifiers) != 0, backwards ? -1 : 1);
         }
         deleteSelection();
     }
@@ -420,16 +419,16 @@ public class WTextField extends WWidget {
     }
 
     public void onDirectionalKey(int direction, int modifiers) {
-        if ((GLFW.GLFW_MOD_SHIFT & modifiers) != 0) {
+        if ((KeyCodes.MOD_SHIFT & modifiers) != 0) {
             if (select == -1 || select == cursor)
                 select = cursor;
-            cursor = skipCharacters((GLFW.GLFW_MOD_CONTROL & modifiers) != 0, direction);
+            cursor = skipCharacters((KeyCodes.MOD_CONTROL & modifiers) != 0, direction);
         } else {
             if (select != -1) {
                 cursor = direction < 0 ? Math.min(cursor, select) : Math.max(cursor, select);
                 select = -1;
             } else {
-                cursor = skipCharacters((GLFW.GLFW_MOD_CONTROL & modifiers) != 0, direction);
+                cursor = skipCharacters((KeyCodes.MOD_CONTROL & modifiers) != 0, direction);
             }
         }
     }
@@ -446,27 +445,46 @@ public class WTextField extends WWidget {
     }
 
     private boolean hasControlDown() {
+        //? if >= 26.3 {
+        return InputConstants.isKeyDown(KeyCodes.LCONTROL) || InputConstants.isKeyDown(KeyCodes.RCONTROL);
+        //? } else {
+        /*
         return InputConstants.isKeyDown(getWindow(), 341) || InputConstants.isKeyDown(getWindow(), 345);
+         */
+        //? }
     }
 
     private boolean hasShiftDown() {
+        //? if >= 26.3 {
+        return InputConstants.isKeyDown(KeyCodes.LSHIFT) || InputConstants.isKeyDown(KeyCodes.RSHIFT);
+        //? } else {
+        /*
         return InputConstants.isKeyDown(getWindow(), 340) || InputConstants.isKeyDown(getWindow(), 344);
+         */
+        //? }
     }
 
     private boolean hasAltDown() {
+        //? if >= 26.3 {
+        return InputConstants.isKeyDown(KeyCodes.LALT) || InputConstants.isKeyDown(KeyCodes.RALT);
+        //? } else {
+        /*
         return InputConstants.isKeyDown(getWindow(), 342) || InputConstants.isKeyDown(getWindow(), 346);
+         */
+        //? }
+
     }
 
     private boolean isPaste(int keyCode) {
-        return keyCode == 86 && hasControlDown() && !hasShiftDown() && !hasAltDown();
+        return keyCode == KeyCodes.KEY_V && hasControlDown() && !hasShiftDown() && !hasAltDown();
     }
 
     private boolean isCopy(int keyCode) {
-        return keyCode == 67 && hasControlDown() && !hasShiftDown() && !hasAltDown();
+        return keyCode == KeyCodes.KEY_C && hasControlDown() && !hasShiftDown() && !hasAltDown();
     }
 
     private boolean isSelectAll(int keyCode) {
-        return keyCode == 65 && hasControlDown() && !hasShiftDown() && !hasAltDown();
+        return keyCode == KeyCodes.KEY_A && hasControlDown() && !hasShiftDown() && !hasAltDown();
     }
 
     @Override
@@ -487,18 +505,18 @@ public class WTextField extends WWidget {
         }
 
         switch (ch) {
-        case GLFW.GLFW_KEY_DELETE -> delete(modifiers, false);
-        case GLFW.GLFW_KEY_BACKSPACE -> delete(modifiers, true);
-        case GLFW.GLFW_KEY_LEFT -> onDirectionalKey(-1, modifiers);
-        case GLFW.GLFW_KEY_RIGHT -> onDirectionalKey(1, modifiers);
-        case GLFW.GLFW_KEY_HOME, GLFW.GLFW_KEY_UP -> {
-            if ((GLFW.GLFW_MOD_SHIFT & modifiers) == 0) {
+        case KeyCodes.DELETE -> delete(modifiers, false);
+        case KeyCodes.BACKSPACE -> delete(modifiers, true);
+        case KeyCodes.LEFT -> onDirectionalKey(-1, modifiers);
+        case KeyCodes.RIGHT -> onDirectionalKey(1, modifiers);
+        case KeyCodes.HOME, KeyCodes.UP -> {
+            if ((KeyCodes.MOD_SHIFT & modifiers) == 0) {
                 select = -1;
             }
             cursor = 0;
         }
-        case GLFW.GLFW_KEY_END, GLFW.GLFW_KEY_DOWN -> {
-            if ((GLFW.GLFW_MOD_SHIFT & modifiers) == 0) {
+        case KeyCodes.END, KeyCodes.DOWN -> {
+            if ((KeyCodes.MOD_SHIFT & modifiers) == 0) {
                 select = -1;
             }
             cursor = text.length();

@@ -9,9 +9,9 @@ import lombok.*;
 import net.minecraft.client.*;
 import net.minecraft.network.chat.*;
 import org.jetbrains.annotations.*;
-import org.lwjgl.glfw.*;
 //? if >= 1.18.0 {
 import net.minecraft.client.gui.narration.*;
+
 //? }
 
 /**
@@ -649,7 +649,7 @@ public class WWidget {
      */
 
     public static boolean isActivationKey(int ch) {
-        return ch == GLFW.GLFW_KEY_ENTER || ch == GLFW.GLFW_KEY_KP_ENTER || ch == GLFW.GLFW_KEY_SPACE;
+        return ch == KeyCodes.ENTER || ch == KeyCodes.KP_ENTER || ch == KeyCodes.SPACE;
     }
 
 }

@@ -61,7 +61,13 @@ public class WPlayerPreview extends WWidget {
         var quaternion = MathUtil.ZP.rotationDegrees(180.0F);
         var quaternion2 = MathUtil.XP.rotationDegrees(lookY * rotationModifier);
         quaternion.mul(quaternion2);
+        //? if >= 26.3 {
+        matrixStack.rotate(quaternion);
+        //? } else {
+        /*
         matrixStack.mulPose(quaternion);
+         */
+        //? }
         matrixStack.translate(0.0D, -1, 0D);
         float yBodyRot = livingEntity.yBodyRot;
         float yRot = EntityUtil.getYRot(livingEntity);

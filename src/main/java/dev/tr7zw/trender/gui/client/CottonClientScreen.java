@@ -326,6 +326,20 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
         *///? }
     }
 
+    //? if >= 26.3 {
+
+    @Override
+    public boolean capturesInput() {
+        return true;
+    }
+
+    @Override
+    public boolean isInputCaptured() {
+        return true;
+    }
+
+    //? }
+
     @Override
     //? if >= 1.21.9 {
 
