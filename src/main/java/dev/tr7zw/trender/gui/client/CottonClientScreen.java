@@ -85,6 +85,9 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     public void removed() {
         super.removed();
         VisualLogger.reset();
+        //? if >= 26.3 {
+        net.minecraft.client.Minecraft.getInstance().textInputManager().stopTextInput(this);
+        //? }
     }
 
     @Nullable
@@ -334,8 +337,9 @@ public class CottonClientScreen extends Screen implements CottonScreenImpl {
     }
 
     @Override
-    public boolean isInputCaptured() {
-        return true;
+    public void added() {
+        super.added();
+        net.minecraft.client.Minecraft.getInstance().textInputManager().startTextInput(this);
     }
 
     //? }
