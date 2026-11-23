@@ -1,5 +1,6 @@
 {
-    "modmenu.descriptionTranslation.trender": "基于 CottonMC LibGui 的多版本渲染库""text.trender.name": "Trender",
+    "modmenu.descriptionTranslation.trender": "基于 CottonMC LibGui 的多版本渲染库",
+    "text.trender.name": "Trender",
     "text.trender.tab.general_options": "选项",
     "text.trender.style": "界面样式",
     "text.trender.style.tooltip": "更改 tr7zw 旗下所有模组的界面样式。",

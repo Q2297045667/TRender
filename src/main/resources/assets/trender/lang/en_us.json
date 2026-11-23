@@ -1,5 +1,6 @@
 {
-    "modmenu.descriptionTranslation.trender": "Multi version rendering library based on CottonMC LibGui""text.trender.name": "Trender",
+    "modmenu.descriptionTranslation.trender": "Multi version rendering library based on CottonMC LibGui",
+    "text.trender.name": "Trender",
     "text.trender.tab.general_options": "Options",
     "text.trender.style": "UI Style",
     "text.trender.style.tooltip": "Changes the UI Style for all of mods by tr7zw.",
